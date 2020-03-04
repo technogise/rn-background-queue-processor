@@ -1,0 +1,19 @@
+{
+  "name": "rn-background-queue-processor",
+  "version": "1.0.0",
+  "description": "Library which creates a background queue processor for react native apps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technogise/rn-background-queue-processor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/technogise/rn-background-queue-processor/issues"
+  },
+  "homepage": "https://github.com/technogise/rn-background-queue-processor#readme"
+}
