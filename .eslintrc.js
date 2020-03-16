@@ -16,7 +16,7 @@ module.exports = {
         "test": true,
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "sourceType": "module",
     },
     "rules": {
         "prefer-destructuring": ["error", {"object": true, "array": false}],

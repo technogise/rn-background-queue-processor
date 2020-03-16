@@ -1,5 +1,6 @@
 import Queue from './Queue';
 import InMemoryAdapter from "./DbAdapter/InMemoryAdapter";
+import Job from "./Job";
 // import Job from './Job';
 
 /**
