@@ -25,6 +25,13 @@ export default class Job {
     }
 
     /**
+     * Get Param name
+     */
+    getParam(){
+        return this.job.param;
+    }
+
+    /**
      * job execute method
      */
     execute(successCallback, failureCallback) {
