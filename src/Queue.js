@@ -53,7 +53,7 @@ export default class Queue {
      * @returns {boolean}
      */
     isEmpty() {
-        return this.items.getSize === 0;
+        return this.getSize() === 0;
     }
 
     /**
