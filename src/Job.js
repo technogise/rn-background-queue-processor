@@ -1,3 +1,5 @@
+import Common from "./utils/Common";
+
 /**
  * Job class
  */
@@ -8,6 +10,7 @@ export default class Job {
      */
     constructor(dbJob) {
         this.job = dbJob;
+        this.job.id = Common.generateUUID();
     }
 
     /**
@@ -37,6 +40,4 @@ export default class Job {
     execute(successCallback, failureCallback) {
         throw new Error('execute method not defined for this job');
     }
-
 }
-
