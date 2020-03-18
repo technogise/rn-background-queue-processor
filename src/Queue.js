@@ -30,4 +30,8 @@ export default class Queue {
     isEmpty() {
         return this.items.getSize === 0;
     }
+
+    getItems() {
+        return this.items.getAllItems();
+    }
 }
