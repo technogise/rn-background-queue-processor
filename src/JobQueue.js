@@ -8,7 +8,7 @@ import Job from "./Job";
  */
 export default class JobQueue extends Queue {
     static fromCollection(collection) {
-    const dbAdapter = new InMemoryAdapter();
+        const dbAdapter = new InMemoryAdapter();
         const queue = new Queue(dbAdapter);
         if (!collection) {
             return queue;
