@@ -28,7 +28,7 @@ export default class QueueProcessor {
         if (this.currentJob) {
             this.currentJob.execute(
                 this.onJobSuccess.bind(this),
-                this.onJobFail.bind(this),
+                this.onJobFail.bind(this)
             );
         }
     }

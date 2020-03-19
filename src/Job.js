@@ -37,7 +37,7 @@ export default class Job {
     /**
      * job execute method
      */
-    execute(successCallback, failureCallback) {
+    execute() {
         throw new Error('execute method not defined for this job');
     }
 }
