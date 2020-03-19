@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
+    "test-coverage": "./node_modules/.bin/jest --coverage",
     "lint": "./node_modules/.bin/eslint . --ext .js"
   },
   "repository": {
