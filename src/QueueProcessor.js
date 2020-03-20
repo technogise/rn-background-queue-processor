@@ -12,6 +12,8 @@ export default class QueueProcessor {
 
     /**
      * Starting point of queue processing
+     *
+     * @param queueObj  Queue object
      */
     start(queueObj) {
         this.queue = queueObj;
