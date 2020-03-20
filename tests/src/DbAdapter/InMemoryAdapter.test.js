@@ -7,15 +7,16 @@ describe('Test InMemoryAdapter', () => {
         expect(actual).toEqual([]);
     });
 
-    test('should test slice', () => {
+    test('should test remove', () => {
         const adapter = new InMemoryAdapter();
         adapter.addItem(11);
         adapter.addItem(22);
         adapter.addItem(33);
-        const actual = adapter.slice();
-        expect(actual).toContain(22);
-        expect(actual).toContain(33);
-        expect(actual).not.toContain(11);
+        adapter.remove();
+        const remainingItems = adapter.getAllItems();
+        expect(remainingItems).toContain(22);
+        expect(remainingItems).toContain(33);
+        expect(remainingItems).not.toContain(11);
     });
 
     test('should test addItem', () => {

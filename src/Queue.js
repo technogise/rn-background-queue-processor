@@ -40,7 +40,7 @@ export default class Queue {
     }
 
     /**
-     * Method to get size of queue
+     * Method to get size of allQueues
      * @returns {void|number}
      */
     getSize() {
@@ -48,7 +48,7 @@ export default class Queue {
     }
 
     /**
-     * Method to check for empty queue
+     * Method to check for empty allQueues
      * @returns {boolean}
      */
     isEmpty() {

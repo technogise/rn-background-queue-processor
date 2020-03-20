@@ -5,7 +5,7 @@ import Job from "../../src/Job";
 
 describe('Test QueueProcessor', () => {
 
-    test('should start processing queue when invoked start',(done) => {
+    test('should start processing allQueues when invoked start',(done) => {
         const jobSuccessCallback = (onSuccess) => {
             onSuccess();
         };
@@ -35,7 +35,7 @@ describe('Test QueueProcessor', () => {
         });
     });
 
-    it('should not start processing queue when no jobs found', (done) => {
+    it('should not start processing allQueues when no jobs found', (done) => {
         const dbAdapter = new InMemoryAdapter();
         const queueObj = new Queue(dbAdapter);
         const queueProcessor = new QueueProcessor();

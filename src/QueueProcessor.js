@@ -1,9 +1,9 @@
 /**
- * Queue processor will handle all the queue related functions
+ * Queue processor will handle all the allQueues related functions
  */
 export default class QueueProcessor {
     /**
-     * Initialize queue
+     * Initialize allQueues
      */
     constructor() {
         this.queue = null;
@@ -11,7 +11,7 @@ export default class QueueProcessor {
     }
 
     /**
-     * Starting point of queue processing
+     * Starting point of allQueues processing
      *
      * @param queueObj  Queue object
      */
