@@ -7,7 +7,7 @@ export default class Queue {
      * @param dbAdapter
      */
     constructor(dbAdapter) {
-        this.items = dbAdapter;
+        this.adapter = dbAdapter;
     }
 
     /**
@@ -15,7 +15,7 @@ export default class Queue {
      * @param item
      */
     enqueue(item) {
-        this.items.addItem(item);
+        this.adapter.addItem(item);
     }
 
     /**
@@ -25,9 +25,8 @@ export default class Queue {
         if (this.isEmpty()) {
             throw new Error('Queue is empty');
         }
-        const returnElement = this.items.getTopItem();
-        this.items = this.items.slice();
-        return returnElement;
+        const returnElement = this.adapter.getTopItem();
+        this.adapter.remove(returnElement.getId());
     }
 
     /**
@@ -37,7 +36,7 @@ export default class Queue {
         if (this.isEmpty()) {
             throw new Error('Queue is empty');
         }
-        return this.items.getTopItem();
+        return this.adapter.getTopItem();
     }
 
     /**
@@ -45,7 +44,7 @@ export default class Queue {
      * @returns {void|number}
      */
     getSize() {
-        return this.items.getLength();
+        return this.adapter.getLength();
     }
 
     /**
@@ -61,6 +60,6 @@ export default class Queue {
      * @returns {void|*[]}
      */
     getItems() {
-        return this.items.getAllItems();
+        return this.adapter.getAllItems();
     }
 }

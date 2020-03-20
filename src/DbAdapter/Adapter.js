@@ -18,7 +18,7 @@ export default class Adapter {
     /**
      * Method to slice items from top
      */
-    slice() {
+    remove() {
         throw new Error('slice method not defined for this adapter');
     }
 

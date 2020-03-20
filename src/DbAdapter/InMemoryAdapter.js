@@ -23,10 +23,10 @@ export default class InMemoryAdapter extends Adapter {
 
     /**
      * Method to slice top most element
-     * @returns {T[]}
      */
-    slice(){
-        return this.items.slice(1);
+    remove(id){
+        // const index = this.items.findIndex(obj => obj.id == id);
+        this.items.shift();
     }
 
     /**

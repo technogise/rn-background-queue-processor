@@ -53,7 +53,11 @@ export default class QueueProcessor {
         this.queue.dequeue();
         // eslint-disable-next-line no-console
         console.error('error', response);
+        if (this.queue.isEmpty()) {
+            this.currentJob = null;
+            return;
+        }
+        this.currentJob = this.queue.peek();
+        this.processJob();
     }
 }
-
-
