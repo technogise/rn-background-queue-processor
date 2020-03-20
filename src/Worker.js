@@ -10,21 +10,28 @@ export default class Worker {
      */
     constructor() {
         if (Worker.instance) {
-            // throw new Error('Instance already exists');
             return Worker.instance;
         }
 
         Worker.instance = this;
+        this.allQueues = [];
         this.queueProcessor = new QueueProcessor();
         return this;
     }
 
     /**
      * Process method
+     */
+    process() {
+        this.allQueues.forEach((currentQueue) => this.queueProcessor.start(currentQueue));
+    }
+
+    /**
+     * Method to add allQueues
      * @param queue
      */
-    process(queue) {
-        this.queueProcessor.start(queue);
+    addQueue(queue){
+        this.allQueues.push(queue);
     }
 
 }
