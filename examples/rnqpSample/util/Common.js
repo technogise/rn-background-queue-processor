@@ -1,3 +1,3 @@
-import Worker from '../../../src/Worker';
+import {Worker} from 'rn-background-queue-processor';
 
 export const worker = new Worker();
