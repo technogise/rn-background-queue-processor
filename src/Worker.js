@@ -8,13 +8,13 @@ export default class Worker {
     /**
      * Constructor for worker
      */
-    constructor() {
+    constructor(queue=[]) {
         if (Worker.instance) {
             return Worker.instance;
         }
 
         Worker.instance = this;
-        this.allQueues = [];
+        this.allQueues = queue;
         this.queueProcessor = new QueueProcessor();
         return this;
     }
