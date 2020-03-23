@@ -4,9 +4,8 @@ import {View} from 'react-native';
 import Button from '../components/Button';
 import styles from '../styles/MainScreenStyle';
 import ExampleJob from '../service/ExampleJob';
-import InMemoryAdapter from '../../../../src/DbAdapter/InMemoryAdapter';
-import Queue from '../../../../src/Queue';
 import {worker} from '../../util/Common';
+import {InMemoryAdapter, Queue} from 'rn-background-queue-processor';
 
 export default class MainScreen extends React.Component {
   constructor() {

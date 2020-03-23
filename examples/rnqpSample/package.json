@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "rn-background-queue-processor": "git+https://github.com/technogise/rn-background-queue-processor.git",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
