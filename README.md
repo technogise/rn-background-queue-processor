@@ -26,7 +26,7 @@ While we ensure to keep the library updated with newer and improved upcoming rel
 
 ## Usage
 
-- ExampleJob.js:
+- [ExampleJob.js](examples/rnqpSample/app/service/ExampleJob.js):
 ![Screenshot](src/utils/readmeImages/ConsoleOnSuccess.png)
 
 ```
@@ -65,7 +65,7 @@ export default class ExampleJob extends Job {
       
   The `ExampleJob` class is developer defined class which extends Job and has user defined `execute`, `jobSuccess` and `jobFail`.
       
-- MainScreen.js:
+- [MainScreen.js](examples/rnqpSample/app/screens/MainScreen.js):
 
 ![Screenshot](src/utils/readmeImages/ExampleScreen.png)
 ```
@@ -92,7 +92,7 @@ onProcess() {
 
   To add the queue and process them using worker class instance 
    
- - Queue
+ - [Queue](src/Queue.js)
     
 ```
 constructor(dbAdapter) {
@@ -107,7 +107,7 @@ constructor(dbAdapter) {
    - `getSize()`: Returns the length of Queue
    - `getItems()`: Gives all items of Queue
    
- - Adapter
+ - [Adapter](src/DbAdapter/Adapter.js)
  
     It is an abstract class which needs to be implemented by users of this package for easy use of any database for storing and processing the queues.
     
@@ -119,7 +119,7 @@ constructor(dbAdapter) {
    - `getLength()`: Method to get length of current queue
    - `getTopItem()`: Method to get the current job for processing
    
- - Job
+ - [Job](src/Job.js)
     While Job class has methods to get id, name and param of current job, we have made the `execute`, `jobSuccess` and `jobFail` function to be abstract for the developer so that he/she decides what to do on execute call.
    
     The `execute` method can be used for performing the action in current job. For example, if the current job is an API call then developer can add the steps to fetch data from API in this `execute` ,method.
@@ -128,7 +128,7 @@ constructor(dbAdapter) {
    
     The `jobFail` method tells the developer defined action that needs to be taken if the API response is 4XX.
 
- - Worker
+ - [Worker](src/Worker.js)
  
     Worker class is a singleton class. In this class, user can add multiple queues using `addQueue(queue)` and process queues using `process()` 
 
