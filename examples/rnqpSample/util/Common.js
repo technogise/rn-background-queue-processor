@@ -1,3 +1,3 @@
-import {Worker} from 'rn-background-queue-processor';
+import {Worker} from '@technogise/rn-background-queue-processor';
 
 export const worker = new Worker();

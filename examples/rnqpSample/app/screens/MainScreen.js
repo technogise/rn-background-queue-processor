@@ -5,7 +5,10 @@ import Button from '../components/Button';
 import styles from '../styles/MainScreenStyle';
 import ExampleJob from '../service/ExampleJob';
 import {worker} from '../../util/Common';
-import {InMemoryAdapter, Queue} from 'rn-background-queue-processor';
+import {
+  InMemoryAdapter,
+  Queue,
+} from '@technogise/rn-background-queue-processor';
 
 export default class MainScreen extends React.Component {
   constructor() {
