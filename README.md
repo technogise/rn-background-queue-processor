@@ -33,10 +33,10 @@ While we ensure to keep the library updated with newer and improved upcoming rel
 ```
 export default class ExampleJob extends Job {
   execute(
-    successCallback1 = data => {
+    successCallback = data => {
       this.jobSuccess(data);
     },
-    failCallback1 = data => {
+    failCallback = data => {
       this.jobFail(data);
     },
   ) {
@@ -46,10 +46,10 @@ export default class ExampleJob extends Job {
         return response.json();
       })
       .then(data => {
-        successCallback1(data);
+        successCallback(data);
       })
       .catch(error => {
-        failCallback1(error);
+        failCallback(error);
       });
   }
 

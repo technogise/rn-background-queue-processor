@@ -51,6 +51,8 @@
     "react-native",
     "queue",
     "job-queue",
-    "task-queue"
+    "task-queue",
+    "background",
+    "job"
   ]
 }
