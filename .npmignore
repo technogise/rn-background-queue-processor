@@ -1,6 +1,5 @@
 node_modules/
 coverage/
-examples/rnqpSample/node_modules/
+examples/
 src/.idea
 tests/.idea
-.idea
