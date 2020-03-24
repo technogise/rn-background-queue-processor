@@ -40,4 +40,18 @@ export default class Job {
     execute() {
         throw new Error('execute method not defined for this job');
     }
+
+    /**
+     * job success method
+     */
+    jobSuccess() {
+
+    }
+
+    /**
+     * job fail method
+     */
+    jobFail() {
+
+    }
 }

@@ -39,6 +39,7 @@ export default class QueueProcessor {
      * Define job success behaviour
      */
     onJobSuccess() {
+        this.currentJob.jobSuccess();
         this.queue.dequeue();
         if (this.queue.isEmpty()) {
             this.currentJob = null;
@@ -52,6 +53,7 @@ export default class QueueProcessor {
      * Handle on failure event for job execution
      */
     onJobFail(response) {
+        this.currentJob.jobFail();
         this.queue.dequeue();
         // eslint-disable-next-line no-console
         console.error('error', response);
