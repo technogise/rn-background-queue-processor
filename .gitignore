@@ -3,3 +3,4 @@ coverage/
 examples/rnqpSample/node_modules/
 src/.idea
 tests/.idea
+.idea
