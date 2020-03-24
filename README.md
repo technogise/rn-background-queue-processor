@@ -22,7 +22,7 @@ While we ensure to keep the library updated with newer and improved upcoming rel
 
 ## Installation steps
 
-`npm i rn-background-queue-processor`
+`npm i @technogise/rn-background-queue-processor`
 
 ## Usage
 
