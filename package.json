@@ -1,12 +1,12 @@
 {
-  "name": "rn-background-queue-processor",
+  "name": "@technogise/rn-background-queue-processor",
   "version": "1.0.0",
   "description": "Library which creates a background queue processor for react native apps.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "test-coverage": "./node_modules/.bin/jest --coverage --coverageReporters=text-lcov | ./node_modules/.bin/coveralls",
-    "lint": "./node_modules/.bin/eslint . --ext .js"
+    "test": "jest",
+    "test-coverage": "jest --coverage --coverageReporters=text-lcov | ./node_modules/.bin/coveralls",
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
@@ -40,5 +40,17 @@
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
-  }
+  },
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "dependencies": {},
+  "keywords": [
+    "react",
+    "react-native",
+    "queue",
+    "job-queue",
+    "task-queue"
+  ]
 }
