@@ -10,7 +10,10 @@ export default class Job {
      */
     constructor(dbJob) {
         this.job = dbJob;
-        this.job.id = Common.generateUUID();
+        this.job.id = dbJob.id ? dbJob.id : Common.generateUUID();
+        this.job.priority = dbJob.priority
+            ? ( (dbJob.priority >= 1 && dbJob.priority <= 10) ? dbJob.priority : 10)
+            : 10;
     }
 
     /**
@@ -32,6 +35,13 @@ export default class Job {
      */
     getParam(){
         return this.job.param;
+    }
+
+    /**
+     * Get Job priority
+     */
+    getPriority(){
+        return this.job.priority;
     }
 
     /**
