@@ -34,7 +34,32 @@ export default class InMemoryAdapter extends Adapter {
      * @param item
      */
     addItem(item){
-        this.items.push(item);
+        this.items.splice(this.findIndex(item.job.priority, this.items) + 1, 0, item);
+    }
+
+    /**
+     * find index to enqueue job in queue
+     *
+     * @param jobPriority
+     * @param array
+     * @param start
+     * @param end
+     * @returns {number|*}
+     */
+    findIndex(jobPriority, array, start, end) {
+        if(array[0]) {
+            if(jobPriority < array[0].job.priority)
+                return -1;
+        }
+        start = start || 0;
+        end = end || array.length;
+        const pivot = Math.floor(start + (end - start) / 2);
+        if (end - start <= 1 || array[pivot].job.priority === jobPriority) return pivot;
+        if (array[pivot].job.priority < jobPriority) {
+            return this.findIndex(jobPriority, array, pivot, end);
+        } else {
+            return this.findIndex(jobPriority, array, start, pivot);
+        }
     }
 
     /**
