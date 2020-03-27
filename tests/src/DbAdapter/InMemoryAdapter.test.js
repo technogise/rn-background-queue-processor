@@ -1,4 +1,5 @@
 import InMemoryAdapter from "../../../src/DbAdapter/InMemoryAdapter";
+import Job from "../../../src/Job";
 
 describe('Test InMemoryAdapter', () => {
     test('should test getAllItems', () => {
@@ -9,42 +10,141 @@ describe('Test InMemoryAdapter', () => {
 
     test('should test remove', () => {
         const adapter = new InMemoryAdapter();
-        adapter.addItem(11);
-        adapter.addItem(22);
-        adapter.addItem(33);
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addItem(job1);
+        adapter.addItem(job2);
+        adapter.addItem(job3);
         adapter.remove();
         const remainingItems = adapter.getAllItems();
-        expect(remainingItems).toContain(22);
-        expect(remainingItems).toContain(33);
-        expect(remainingItems).not.toContain(11);
+        expect(remainingItems).toEqual([job2, job3]);
+        expect(remainingItems).not.toContain(job1);
     });
 
     test('should test addItem', () => {
         const adapter = new InMemoryAdapter();
-        adapter.addItem(11);
-        adapter.addItem(22);
-        adapter.addItem(33);
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addItem(job1);
+        adapter.addItem(job2);
+        adapter.addItem(job3);
         const actual = adapter.getAllItems();
-        expect(actual).toContain(22);
-        expect(actual).toContain(33);
-        expect(actual).not.toContain(44);
+        expect(actual).toEqual([job1, job2, job3]);
     });
 
     test('should test getLength', () => {
         const adapter = new InMemoryAdapter();
-        adapter.addItem(11);
-        adapter.addItem(22);
-        adapter.addItem(33);
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addItem(job1);
+        adapter.addItem(job2);
+        adapter.addItem(job3);
         const actual = adapter.getLength();
         expect(actual).toBe(3);
     });
 
     test('should test getTopItem', () => {
         const adapter = new InMemoryAdapter();
-        adapter.addItem(11);
-        adapter.addItem(22);
-        adapter.addItem(33);
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addItem(job1);
+        adapter.addItem(job2);
+        adapter.addItem(job3);
         const actual = adapter.getTopItem();
-        expect(actual).toBe(11);
+        expect(actual).toEqual(job1);
+    });
+
+    test('should add item according to priority', () => {
+        const adapter = new InMemoryAdapter();
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+            priority: 3,
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+            priority: 1,
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+            priority: 2,
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addItem(job1);
+        adapter.addItem(job2);
+        adapter.addItem(job3);
+        const actual = adapter.getAllItems();
+        expect(actual).toEqual([job2, job3, job1]);
     });
 });
