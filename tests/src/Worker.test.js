@@ -1,6 +1,7 @@
 import Worker from "../../src/Worker";
 import Queue from "../../src/Queue";
 import InMemoryAdapter from "../../src/DbAdapter/InMemoryAdapter";
+import Job from "../../src/Job";
 
 describe('Test worker class', () => {
     test('should test worker class to be singleton', () => {
@@ -15,10 +16,9 @@ describe('Test worker class', () => {
         const dbAdapter = new InMemoryAdapter();
         const queue1 = new Queue(dbAdapter);
         const queue2 = new Queue(dbAdapter);
-        queue2.enqueue({execute: () => {console.log('in execute 1')}, 'b': 2});
-        queue2.enqueue({execute: () => {console.log('in execute 3')}, 'd': 4});
-
-        queue1.enqueue({execute: () => {console.log('in execute 5')}, 'f': 6});
+        queue2.enqueue(new Job({execute: () => {console.log('in execute 1')}, 'b': 2}));
+        queue2.enqueue(new Job({execute: () => {console.log('in execute 3')}, 'd': 4}));
+        queue1.enqueue(new Job({execute: () => {console.log('in execute 5')}, 'f': 6}));
 
         workerInstance.queueProcessor.start = jest.fn();
         workerInstance.addQueue(queue1);
