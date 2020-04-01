@@ -59,4 +59,3 @@ export default class Realm {
 }
 Realm.Object = class Object {
 };
-
