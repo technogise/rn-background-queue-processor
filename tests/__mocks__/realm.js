@@ -57,11 +57,4 @@ export default class Realm {
         this.delete.mockClear();
     }
 }
-Realm.Object = class Object {
-    /**
-     * IsValid mock method
-     *
-     * @return {boolean}
-     */
-    isValid() { return true; }
-};
+Realm.Object = class Object {};
