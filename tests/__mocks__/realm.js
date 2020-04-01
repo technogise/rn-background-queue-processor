@@ -19,6 +19,18 @@ export default class Realm {
     }
 
     /**
+     * Set sorted mock collection
+     *
+     * @param unsortedCollection Collection to be sorted
+     * @param sortBy  Column name on which sorting should be performed
+     */
+    setSortedMockCollection(unsortedCollection, sortBy) {
+        this.objectMethodImpl = {
+            sorted: jest.fn().mockReturnValue(_.sortBy(unsortedCollection, sortBy)),
+        };
+    }
+
+    /**
      * Objects mock method
      *
      * @param schemaName

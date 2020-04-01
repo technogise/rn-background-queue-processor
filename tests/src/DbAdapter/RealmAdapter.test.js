@@ -101,5 +101,23 @@ describe('Test RealmAdapter', () => {
         const items = adapter.getAllItems();
         expect(items).toEqual([jobToBeCreated1, jobToBeCreated2]);
     });
+
+    test('should getTopItem', () => {
+        const jobToBeCreated = {
+            id: 'testid',
+            name: 'testJob',
+            param: 'testParam',
+            priority: 1,
+        };
+        const job = new Job(jobToBeCreated);
+        const adapter = new RealmAdapter(Job.prototype);
+        realmdb.setSortedMockCollection(job, JobSchema.COLUMN_PRIORITY);
+        const item = adapter.getTopItem();
+        expect(item instanceof Job).toBeTruthy();
+        expect(item.job.id).toBe('testid');
+        expect(item.job.name).toBe('testJob');
+        expect(item.job.param).toBe('testParam');
+        expect(item.job.priority).toBe(1);
+    });
 });
 
