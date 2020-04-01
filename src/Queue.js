@@ -26,7 +26,7 @@ export default class Queue {
             throw new Error('Queue is empty');
         }
         const returnElement = this.adapter.getTopItem();
-        this.adapter.remove(returnElement.getId());
+        this.adapter.remove(returnElement.job.id);
     }
 
     /**
