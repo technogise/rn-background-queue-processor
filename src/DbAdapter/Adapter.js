@@ -5,7 +5,23 @@ export default class Adapter {
     /**
      * Adapter constructor
      */
-    constructor() {
+    constructor(jobPrototype) {
+        this.jobPrototype = jobPrototype
+    }
+
+    /**
+     * get job instance
+     *
+     * @returns {any}
+     */
+    getJobInstance(data) {
+        const object = Object.create(this.jobPrototype).constructor;
+        return new object({
+            id: data[0].id,
+            name: data[0].name,
+            param: data[0].param,
+            priority: data[0].priority,
+        });
     }
 
     /**
