@@ -45,7 +45,6 @@
     "example": "examples",
     "test": "tests"
   },
-  "dependencies": {},
   "keywords": [
     "react",
     "react-native",
@@ -54,5 +53,9 @@
     "task-queue",
     "background",
     "job"
-  ]
+  ],
+  "dependencies": {
+    "realm": "^3.6.5",
+    "underscore": "^1.10.2"
+  }
 }
