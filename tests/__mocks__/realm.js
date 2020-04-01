@@ -58,4 +58,10 @@ export default class Realm {
     }
 }
 Realm.Object = class Object {
+    /**
+     * IsValid mock method
+     *
+     * @return {boolean}
+     */
+    isValid() { return true; }
 };
