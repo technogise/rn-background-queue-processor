@@ -1,5 +1,7 @@
 node_modules/
 coverage/
-examples/
+examples
+.idea
 src/.idea
 tests/.idea
+tests

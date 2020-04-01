@@ -1,3 +1,6 @@
+import defaultConfigs from '../config/defaultConfigs';
+import Queue from "./Queue";
+
 /**
  * Queue processor will handle all the allQueues related functions
  */
@@ -8,6 +11,7 @@ export default class QueueProcessor {
     constructor() {
         this.queue = null;
         this.currentJob = null;
+        this.failedQueue = null;
     }
 
     /**
@@ -17,6 +21,10 @@ export default class QueueProcessor {
      */
     start(queueObj) {
         this.queue = queueObj;
+        if (this.failedQueue === null) {
+            const failedQueueDbAdapter = queueObj.adapter.__proto__.constructor;
+            this.failedQueue = new Queue(new failedQueueDbAdapter());
+        }
         this.currentJob = !this.queue.isEmpty() ? this.queue.peek() : null;
         if (!this.queue.isEmpty()) {
             this.processJob();
@@ -26,11 +34,11 @@ export default class QueueProcessor {
     /**
      * Execute the current job
      */
-    processJob() {
+    processJob(tryCount = 1) {
         if (this.currentJob) {
             this.currentJob.execute(
                 this.onJobSuccess.bind(this),
-                this.onJobFail.bind(this)
+                this.onJobFail.bind(this, tryCount)
             );
         }
     }
@@ -52,16 +60,25 @@ export default class QueueProcessor {
     /**
      * Handle on failure event for job execution
      */
-    onJobFail(response) {
-        this.currentJob.jobFail(response);
-        this.queue.dequeue();
-        // eslint-disable-next-line no-console
-        console.error('error', response);
-        if (this.queue.isEmpty()) {
-            this.currentJob = null;
+    onJobFail(retryCount, response) {
+        const {maxRetries,retryInterval} = defaultConfigs;
+        if (retryCount < maxRetries) {
+            retryCount += 1;
+            setTimeout(() => this.processJob(retryCount), retryInterval);
             return;
         }
-        this.currentJob = this.queue.peek();
-        this.processJob();
+        if (retryCount >= maxRetries){
+            this.currentJob.jobFail(response);
+            //enqueue in failed queue and then dequeue
+            this.failedQueue.enqueue(this.currentJob);
+            this.queue.dequeue();
+            console.log('error response on fail:- ', response);
+            if (this.queue.isEmpty()) {
+                this.currentJob = null;
+                return;
+            }
+            this.currentJob = this.queue.peek();
+            this.processJob();
+        }
     }
 }

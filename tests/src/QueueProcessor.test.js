@@ -2,6 +2,7 @@ import InMemoryAdapter from '../../src/DbAdapter/InMemoryAdapter';
 import Queue from "../../src/Queue";
 import QueueProcessor from "../../src/QueueProcessor";
 import Job from "../../src/Job";
+import defaultConfigs from '../../config/defaultConfigs';
 
 describe('Test QueueProcessor', () => {
 
@@ -50,8 +51,19 @@ describe('Test QueueProcessor', () => {
         });
     });
 
-    test('should dequeue and log error if any job fails',(done) => {
+    test('should create failed queue from db instance passed by user ', () => {
+        const dbAdapter = new InMemoryAdapter();
+        const queueObj = new Queue(dbAdapter);
+        const queueProcessor = new QueueProcessor();
+        queueProcessor.start(queueObj);
+        expect(queueProcessor.failedQueue.adapter.__proto__.constructor.name).toBe('InMemoryAdapter');
+    });
+
+    test('should dequeue and log error if any job fails',() => {
+        jest.useFakeTimers();
         const response = "JOB_FAIL";
+        defaultConfigs.maxRetries = 1;
+        defaultConfigs.retryInterval = 1000;
         const jobFailCallback = (onSuccess, onFail) => {
             onFail(response);
         };
@@ -78,13 +90,40 @@ describe('Test QueueProcessor', () => {
         queueObj.enqueue(job2);
         const queueProcessor = new QueueProcessor();
         queueProcessor.start(queueObj);
-        setTimeout(() => {
-            expect(job1.execute).toHaveBeenCalled();
-            expect(job2.execute).toHaveBeenCalled();
-            expect(job1.jobSuccess).toHaveBeenCalled();
-            expect(job2.jobFail).toHaveBeenCalled();
-            expect(queueObj.getSize()).toBe(0);
-            done();
-        });
+        jest.runAllTimers();
+        expect(job1.execute).toHaveBeenCalled();
+        expect(job2.execute).toHaveBeenCalled();
+        expect(job1.jobSuccess).toHaveBeenCalled();
+        expect(job2.jobFail).toHaveBeenCalled();
+        expect(queueObj.getSize()).toBe(0);
+    });
+
+    test('should check max retries for job fail',() => {
+        jest.useFakeTimers();
+        const response = "JOB_FAIL";
+        defaultConfigs.maxRetries = 3;
+        defaultConfigs.retryInterval = 1000;
+        const jobFailCallback = (onSuccess, onFail) => {
+            onFail(response);
+        };
+        const jobToBeCreated = {
+            name: 'testJob2',
+            param: {},
+        };
+        const job = new Job(jobToBeCreated);
+        job.jobFail = jest.fn();
+        job.execute = jest.fn(jobFailCallback);
+        const dbAdapter = new InMemoryAdapter();
+        const queueObj = new Queue(dbAdapter);
+        queueObj.enqueue(job);
+        const queueProcessor = new QueueProcessor();
+        queueProcessor.start(queueObj);
+        jest.runAllTimers();
+        expect(job.execute).toHaveBeenCalled();
+        expect(job.execute).toHaveBeenCalledTimes(3);
+        expect(job.jobFail).toHaveBeenCalled();
+        expect(job.jobFail).toHaveBeenCalledTimes(1);
+        expect(queueObj.getSize()).toBe(0);
+        expect(queueProcessor.failedQueue.getSize()).toBe(1);
     });
 });

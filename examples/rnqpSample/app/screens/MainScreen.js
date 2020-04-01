@@ -15,7 +15,7 @@ export default class MainScreen extends React.Component {
     super();
     const dbAdapter = new InMemoryAdapter();
     this.queue = new Queue(dbAdapter);
-    _.bindAll(this, 'onAdd', 'onProcess');
+    _.bindAll(this, 'onAdd', 'onProcess', 'onAddFail');
   }
 
   onAdd() {
@@ -23,6 +23,17 @@ export default class MainScreen extends React.Component {
       name: 'testJob',
       param: {
         url: 'http://dummy.restapiexample.com/api/v1/employees',
+      },
+    };
+    const job = new ExampleJob(jobToBeCreated);
+    this.queue.enqueue(job);
+  }
+
+  onAddFail() {
+    const jobToBeCreated = {
+      name: 'fail job',
+      param: {
+        url: 'http://dummy.restapiexample.com/api/v1/emple',
       },
     };
     const job = new ExampleJob(jobToBeCreated);
@@ -39,6 +50,7 @@ export default class MainScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
           <Button onClick={this.onAdd}>ADD</Button>
+          <Button onClick={this.onAddFail}>ADD 2 Fail</Button>
           <Button onClick={this.onProcess}>PROCESS</Button>
         </View>
       </View>
