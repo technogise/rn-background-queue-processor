@@ -18,6 +18,10 @@
     "url": "https://github.com/technogise/rn-background-queue-processor/issues"
   },
   "homepage": "https://github.com/technogise/rn-background-queue-processor#readme",
+  "dependencies": {
+    "realm": "^2.24.0",
+    "underscore": "^1.10.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/runtime": "^7.5.5",
@@ -53,9 +57,5 @@
     "task-queue",
     "background",
     "job"
-  ],
-  "dependencies": {
-    "realm": "^2.24.0",
-    "underscore": "^1.10.2"
-  }
+  ]
 }
