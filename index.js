@@ -5,6 +5,8 @@ import Job from './src/Job';
 import Worker from './src/Worker';
 import {maxRetries, retryInterval} from "./config/defaultConfigs";
 import realmConfig from "./realmConfig";
+import FailedJobSchema from "./src/local-db/FailedJobSchema";
+import JobSchema from "./src/local-db/JobSchema";
 
 export {
     InMemoryAdapter,
@@ -13,6 +15,8 @@ export {
     Job,
     Worker,
     realmConfig,
+    FailedJobSchema,
+    JobSchema,
     maxRetries,
     retryInterval
 };

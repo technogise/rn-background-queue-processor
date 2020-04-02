@@ -1,21 +1,23 @@
 import React from 'react';
 import _ from 'underscore';
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
 import Button from '../components/Button';
 import styles from '../styles/MainScreenStyle';
 import ExampleJob from '../service/ExampleJob';
 import {worker} from '../../util/Common';
 import {
-  InMemoryAdapter,
+  RealmAdapter,
   Queue,
+  realmConfig,
+  FailedJobSchema,
 } from '@technogise/rn-background-queue-processor';
 
 export default class MainScreen extends React.Component {
   constructor() {
     super();
-    const dbAdapter = new InMemoryAdapter();
+    const dbAdapter = new RealmAdapter(ExampleJob.prototype);
     this.queue = new Queue(dbAdapter);
-    _.bindAll(this, 'onAdd', 'onProcess', 'onAddFail');
+    _.bindAll(this, 'onAdd', 'onProcess', 'onAddFail', 'test');
   }
 
   onAdd() {
@@ -45,13 +47,21 @@ export default class MainScreen extends React.Component {
     worker.process();
   }
 
+  test() {
+    const failedJobLength = JSON.stringify(
+      realmConfig.objects(FailedJobSchema.NAME).length,
+    );
+    Alert.alert('Number of failed Jobs', failedJobLength);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <Button onClick={this.onAdd}>ADD</Button>
-          <Button onClick={this.onAddFail}>ADD 2 Fail</Button>
+          <Button onClick={this.onAdd}>1. ADD JOB</Button>
+          <Button onClick={this.onAddFail}>2. ADD JOB (to test Fail)</Button>
           <Button onClick={this.onProcess}>PROCESS</Button>
+          <Button onClick={this.test}>Get Number of Failed Jobs</Button>
         </View>
       </View>
     );

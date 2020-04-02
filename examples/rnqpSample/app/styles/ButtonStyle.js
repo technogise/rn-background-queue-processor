@@ -6,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.BUTTON_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 85,
+    width: 200,
     height: 45,
     borderRadius: 7,
     marginBottom: 10,

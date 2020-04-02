@@ -9,7 +9,8 @@ export default class ExampleJob extends Job {
       this.jobFail(data);
     },
   ) {
-    const {url} = this.job.param;
+    const param = JSON.parse(this.job.param);
+    const url = param.url;
     fetch(url)
       .then(response => {
         return response.json();
