@@ -1,4 +1,4 @@
 import Realm from 'realm';
-import schema from './schema';
+import JobSchema from "./src/local-db/JobSchema";
 
-export default new Realm({ schema, schemaVersion: 1 });
+export default new Realm({ schema : [JobSchema.schema], schemaVersion: 1 });
