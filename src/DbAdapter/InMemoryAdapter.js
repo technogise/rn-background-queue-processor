@@ -11,6 +11,7 @@ export default class InMemoryAdapter extends Adapter {
     constructor(props) {
         super(props);
         this.items = [];
+        this.failedItems = [];
     }
 
     /**
@@ -35,6 +36,14 @@ export default class InMemoryAdapter extends Adapter {
      */
     addItem(item){
         this.items.splice(this.findIndex(item.job.priority, this.items) + 1, 0, item);
+    }
+
+    /**
+     * Method to add failed item
+     * @param item
+     */
+    addFailedItem(item){
+        this.failedItems.push(item);
     }
 
     /**

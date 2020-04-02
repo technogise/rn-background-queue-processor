@@ -64,6 +64,33 @@ describe('Test InMemoryAdapter', () => {
         expect(actual).toEqual([job1, job2, job3]);
     });
 
+    test('should test addFailedItem', () => {
+        const adapter = new InMemoryAdapter();
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+        };
+        const job1 = new Job(jobToBeCreated1);
+        const jobToBeCreated2 = {
+            id: 'testid',
+            name: 'testJob2',
+            param: {'a':1},
+        };
+        const job2 = new Job(jobToBeCreated2);
+        const jobToBeCreated3 = {
+            id: 'testid',
+            name: 'testJob3',
+            param: {'a':1},
+        };
+        const job3 = new Job(jobToBeCreated3);
+        adapter.addFailedItem(job1);
+        adapter.addFailedItem(job2);
+        adapter.addFailedItem(job3);
+        const actual = adapter.failedItems;
+        expect(actual).toEqual([job1, job2, job3]);
+    });
+
     test('should test getLength', () => {
         const adapter = new InMemoryAdapter();
         const jobToBeCreated1 = {

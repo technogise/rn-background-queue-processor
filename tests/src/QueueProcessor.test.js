@@ -124,6 +124,5 @@ describe('Test QueueProcessor', () => {
         expect(job.jobFail).toHaveBeenCalled();
         expect(job.jobFail).toHaveBeenCalledTimes(1);
         expect(queueObj.getSize()).toBe(0);
-        expect(queueProcessor.failedQueue.getSize()).toBe(1);
     });
 });

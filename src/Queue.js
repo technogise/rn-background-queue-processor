@@ -19,6 +19,14 @@ export default class Queue {
     }
 
     /**
+     * Failed Job Enqueue method
+     * @param item
+     */
+    failedJobEnqueue(item) {
+        this.adapter.addFailedItem(item);
+    }
+
+    /**
      * Dequeue method
      */
     dequeue() {

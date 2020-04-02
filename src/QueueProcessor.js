@@ -69,10 +69,8 @@ export default class QueueProcessor {
         }
         if (retryCount >= maxRetries){
             this.currentJob.jobFail(response);
-            //enqueue in failed queue and then dequeue
-            this.failedQueue.enqueue(this.currentJob);
+            this.failedQueue.failedJobEnqueue(this.currentJob);
             this.queue.dequeue();
-            console.log('error response on fail:- ', response);
             if (this.queue.isEmpty()) {
                 this.currentJob = null;
                 return;

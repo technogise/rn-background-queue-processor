@@ -1,6 +1,7 @@
 import realmdb from '../../realmConfig';
 import Adapter from './Adapter';
 import JobSchema from '../local-db/JobSchema';
+import FailedJobSchema from "../local-db/FailedJobSchema";
 
 /**
  * RealmAdapter class
@@ -56,6 +57,27 @@ export default class RealmAdapter extends Adapter {
      */
     getLength() {
         return realmdb.objects(JobSchema.NAME).length;
+    }
+
+    /**
+     * Method to add failed item
+     * @param item
+     */
+    addFailedItem(item) {
+        const {job} = item;
+        const {id} = job;
+        const {name} = job;
+        const param = JSON.stringify(job.param);
+        const {priority} = job;
+        const jobToBeCreated = {
+            [FailedJobSchema.COLUMN_ID]: id,
+            [FailedJobSchema.COLUMN_NAME]: name,
+            [FailedJobSchema.COLUMN_PARAM]: param,
+            [FailedJobSchema.COLUMN_PRIORITY]: priority,
+        };
+        realmdb.write(() => {
+            realmdb.create(FailedJobSchema.NAME, jobToBeCreated);
+        });
     }
 
     /**

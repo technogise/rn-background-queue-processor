@@ -3,7 +3,7 @@ import Realm from 'realm';
 /**
  * Schema for Job
  */
-export default class JobSchema extends Realm.Object {
+export default class FailedJobSchema extends Realm.Object {
     /**
      * Table name
      *
@@ -11,7 +11,7 @@ export default class JobSchema extends Realm.Object {
      * @constructor
      */
     static get NAME() {
-        return 'Jobs';
+        return 'FailedJobs';
     }
 
     /**
@@ -56,13 +56,13 @@ export default class JobSchema extends Realm.Object {
     }
 }
 
-JobSchema.schema = {
-    name: JobSchema.NAME,
-    primaryKey: JobSchema.COLUMN_ID,
+FailedJobSchema.schema = {
+    name: FailedJobSchema.NAME,
+    primaryKey: FailedJobSchema.COLUMN_ID,
     properties: {
-        [JobSchema.COLUMN_ID]: 'string',
-        [JobSchema.COLUMN_NAME]: 'string',
-        [JobSchema.COLUMN_PARAM]: 'string',
-        [JobSchema.COLUMN_PRIORITY]: 'int',
+        [FailedJobSchema.COLUMN_ID]: 'string',
+        [FailedJobSchema.COLUMN_NAME]: 'string',
+        [FailedJobSchema.COLUMN_PARAM]: 'string',
+        [FailedJobSchema.COLUMN_PRIORITY]: 'int',
     },
 };

@@ -2,6 +2,7 @@ import RealmAdapter from "../../../src/DbAdapter/RealmAdapter";
 import Job from "../../../src/Job";
 import realmdb from '../../../realmConfig';
 import JobSchema from "../../../src/local-db/JobSchema";
+import FailedJobSchema from "../../../src/local-db/FailedJobSchema";
 
 describe('Test RealmAdapter', () => {
     test('should test addItem', (done) => {
@@ -40,6 +41,32 @@ describe('Test RealmAdapter', () => {
             );
             expect(realmdb.create).toHaveBeenCalledWith(
                 JobSchema.NAME, entity2
+            );
+            done();
+        });
+    });
+
+    test('should test addFailedItem', (done) => {
+        realmdb.mockClear();
+        const adapter = new RealmAdapter();
+        const jobToBeCreated1 = {
+            id: 'testid',
+            name: 'testJob1',
+            param: {'a':1},
+            priority: 1,
+        };
+        const job1 = new Job(jobToBeCreated1);
+        adapter.addFailedItem(job1);
+        const entity1 = {
+            [FailedJobSchema.COLUMN_ID]: jobToBeCreated1.id,
+            [FailedJobSchema.COLUMN_NAME]: jobToBeCreated1.name,
+            [FailedJobSchema.COLUMN_PARAM]: JSON.stringify(jobToBeCreated1.param),
+            [FailedJobSchema.COLUMN_PRIORITY]: jobToBeCreated1.priority,
+        };
+        setTimeout(() => {
+            expect(realmdb.create).toHaveBeenCalledTimes(1);
+            expect(realmdb.create).toHaveBeenCalledWith(
+                FailedJobSchema.NAME, entity1
             );
             done();
         });
@@ -120,4 +147,3 @@ describe('Test RealmAdapter', () => {
         expect(item.job.priority).toBe(1);
     });
 });
-
