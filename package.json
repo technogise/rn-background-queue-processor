@@ -55,7 +55,6 @@
     "job"
   ],
   "dependencies": {
-    "realm": "^5.0.3",
     "underscore": "^1.10.2"
   }
 }

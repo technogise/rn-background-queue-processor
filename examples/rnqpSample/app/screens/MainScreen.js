@@ -5,12 +5,12 @@ import Button from '../components/Button';
 import styles from '../styles/MainScreenStyle';
 import ExampleJob from '../service/ExampleJob';
 import {worker} from '../../util/Common';
+import {Queue} from '@technogise/rn-background-queue-processor';
 import {
   RealmAdapter,
-  Queue,
   realmConfig,
   FailedJobSchema,
-} from '@technogise/rn-background-queue-processor';
+} from 'rn-background-queue-processor-realm-adapter';
 
 export default class MainScreen extends React.Component {
   constructor() {
