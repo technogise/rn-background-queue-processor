@@ -1,4 +1,3 @@
-import defaultConfigs from '../config/defaultConfigs';
 import Queue from "./Queue";
 
 /**
@@ -61,7 +60,8 @@ export default class QueueProcessor {
      * Handle on failure event for job execution
      */
     onJobFail(retryCount, response) {
-        const {maxRetries,retryInterval} = defaultConfigs;
+        const {maxRetries} = this.currentJob.job;
+        const {retryInterval} = this.currentJob.job;
         if (retryCount < maxRetries) {
             retryCount += 1;
             setTimeout(() => this.processJob(retryCount), retryInterval);

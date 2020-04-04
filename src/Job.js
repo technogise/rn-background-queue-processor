@@ -9,11 +9,22 @@ export default class Job {
      * @constructor
      */
     constructor(dbJob) {
+        this.initializeJob(dbJob);
+    }
+
+    /**
+     * job initialization
+     *
+     * @param dbJob
+     */
+    initializeJob(dbJob) {
         this.job = dbJob;
         this.job.id = dbJob.id ? dbJob.id : Common.generateUUID();
         this.job.priority = dbJob.priority
             ? ( (dbJob.priority >= 1 && dbJob.priority <= 10) ? dbJob.priority : 10)
             : 10;
+        this.job.retryInterval = dbJob.retryInterval ? dbJob.retryInterval : 2000;
+        this.job.maxRetries = dbJob.maxRetries ? dbJob.maxRetries : 5;
     }
 
     /**
@@ -42,6 +53,20 @@ export default class Job {
      */
     getPriority(){
         return this.job.priority;
+    }
+
+    /**
+     * Get retry interval
+     */
+    getRetryInterval() {
+        return this.job.retryInterval;
+    }
+
+    /**
+     * get max retries
+     */
+    getMaxRetries() {
+        return this.job.maxRetries;
     }
 
     /**

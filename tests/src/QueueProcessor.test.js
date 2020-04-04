@@ -2,7 +2,6 @@ import InMemoryAdapter from '../../src/DbAdapter/InMemoryAdapter';
 import Queue from "../../src/Queue";
 import QueueProcessor from "../../src/QueueProcessor";
 import Job from "../../src/Job";
-import defaultConfigs from '../../config/defaultConfigs';
 
 describe('Test QueueProcessor', () => {
 
@@ -62,8 +61,6 @@ describe('Test QueueProcessor', () => {
     test('should dequeue and log error if any job fails',() => {
         jest.useFakeTimers();
         const response = "JOB_FAIL";
-        defaultConfigs.maxRetries = 1;
-        defaultConfigs.retryInterval = 1000;
         const jobFailCallback = (onSuccess, onFail) => {
             onFail(response);
         };
@@ -73,10 +70,14 @@ describe('Test QueueProcessor', () => {
         const jobToBeCreated1 = {
             name: 'testJob1',
             param: {},
+            maxRetries: 1,
+            retryInterval: 1000,
         };
         const jobToBeCreated2 = {
             name: 'testJob2',
             param: {},
+            maxRetries: 1,
+            retryInterval: 1000,
         };
         const job1 = new Job(jobToBeCreated1);
         const job2 = new Job(jobToBeCreated2);
@@ -101,14 +102,14 @@ describe('Test QueueProcessor', () => {
     test('should check max retries for job fail',() => {
         jest.useFakeTimers();
         const response = "JOB_FAIL";
-        defaultConfigs.maxRetries = 3;
-        defaultConfigs.retryInterval = 1000;
         const jobFailCallback = (onSuccess, onFail) => {
             onFail(response);
         };
         const jobToBeCreated = {
             name: 'testJob2',
             param: {},
+            retryInterval: 1000,
+            maxRetries: 3,
         };
         const job = new Job(jobToBeCreated);
         job.jobFail = jest.fn();
