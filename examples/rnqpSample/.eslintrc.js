@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  extends: '@react-native-community',
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
     "prefer-destructuring": ["error", {"object": true, "array": false}],

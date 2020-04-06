@@ -1,16 +1,16 @@
 import React from 'react';
 import _ from 'underscore';
 import {View, Alert} from 'react-native';
-import Button from '../components/Button';
-import styles from '../styles/MainScreenStyle';
-import ExampleJob from '../service/ExampleJob';
-import {worker} from '../../util/Common';
 import {Queue} from '@technogise/rn-background-queue-processor';
 import {
   RealmAdapter,
   realmConfig,
   FailedJobSchema,
 } from 'rn-background-queue-processor-realm-adapter';
+import Button from '../components/Button';
+import styles from '../styles/MainScreenStyle';
+import ExampleJob from '../service/ExampleJob';
+import {worker} from '../../util/Common';
 
 export default class MainScreen extends React.Component {
   constructor() {
