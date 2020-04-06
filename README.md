@@ -21,7 +21,7 @@ This package does not have any prerequisites that need to be installed.
 
 ## Compatibility
 
-While we ensure to keep the library updated with newer and improved upcoming releases for React Native, our current version works well for `React Native: v0.61.5`
+While we ensure to keep the library updated with newer and improved upcoming releases for React Native, our current version works well for `React Native: v0.62.1`
 
 ## Installation steps
 

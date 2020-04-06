@@ -12,7 +12,7 @@
   "dependencies": {
     "@technogise/rn-background-queue-processor": "git+https://github.com/technogise/rn-background-queue-processor.git",
     "react": "16.9.0",
-    "react-native": "0.61.5",
+    "react-native": "^0.62.1",
     "realm": "^5.0.3",
     "rn-background-queue-processor-realm-adapter": "git+https://github.com/technogise/rn-background-queue-processor-realm-adapter.git",
     "underscore": "^1.9.1"
