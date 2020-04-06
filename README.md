@@ -4,7 +4,7 @@
 
 # React Native Queue Processor
 
-A package with the help of which users will be able to add and process different kind of jobs in separate queues.
+A package with the help of which users will be able to add and process different kind of jobs in a queues with background persistent queue processing
 
 ## Prerequisite
 
@@ -12,9 +12,11 @@ This package does not have any prerequisites that need to be installed.
 
 ## Features
 
-- A React Native Queue Processor with non persistent queues( persistent queues coming up in next release). 
-- Jobs will be executed using the queues. 
+- A React Native Queue Processor with persistent queues using [rn-background-queue-processor-realm-adapter](https://github.com/technogise/rn-background-queue-processor-realm-adapter)
+- Jobs will be executed according to priorities using the queues. 
+- Job will retry until the failed count matches job's number of retry attempts with retryInterval
 - Has functionality for Worker instances as well. 
+- Background Persistent queue processing 
 - It also plays well with Workers so your jobs can be thrown on the queue, then processed in dedicated worker threads for improved processing performance.
 
 ## Compatibility
@@ -27,72 +29,8 @@ While we ensure to keep the library updated with newer and improved upcoming rel
 
 ## Usage
 
-- [ExampleJob.js](examples/rnqpSample/app/service/ExampleJob.js):
-![Screenshot](src/utils/readmeImages/ConsoleOnSuccess.png)
-
-```
-export default class ExampleJob extends Job {
-  execute(
-    successCallback = data => {
-      this.jobSuccess(data);
-    },
-    failCallback = data => {
-      this.jobFail(data);
-    },
-  ) {
-    const {url} = this.job.param;
-    fetch(url)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        successCallback(data);
-      })
-      .catch(error => {
-        failCallback(error);
-      });
-  }
-
-  jobSuccess(data) {
-    console.log('job success', this.job.name, this.job.id, 'response', data);
-  }
-
-  jobFail(data) {
-    console.log('job Fail', this.job.name, this.job.id, data, 'response', data);
-  }
-}
-
-```
-      
-  The `ExampleJob` class is developer defined class which extends Job and has user defined `execute`, `jobSuccess` and `jobFail`.
-      
-- [MainScreen.js](examples/rnqpSample/app/screens/MainScreen.js):
-
-![Screenshot](src/utils/readmeImages/ExampleScreen.png)
-```
-onAdd() {
-  const jobToBeCreated = {
-    name: 'testJob',
-    param: {
-      url: 'http://dummy.restapiexample.com/api/v1/employees',
-    },
-  };
-  const job = new ExampleJob(jobToBeCreated);
-  this.queue.enqueue(job);
-}
-```
-  To add a job in the queue
-
-```
-onProcess() {
-  worker.addQueue(queue);
-  worker.process();
-}
-
-```
-
-  To add the queue and process them using worker class instance 
-   
+- Here is a [Sample Application](https://github.com/technogise/rn-background-queue-processor/tree/master/examples/rnqpSample)
+         
  - [Queue](src/Queue.js)
     
 ```
@@ -133,17 +71,6 @@ constructor(dbAdapter) {
  
     Worker class is a singleton class. In this class, user can add multiple queues using `addQueue(queue)` and process queues using `process()` 
 
-
-### Upcoming in Next Release:
-
-In the next version of React Native Queue Processor, we plan to add following features:
-
-- Background Persistent queue processing 
-- Retry job on fail
-- Multiple queues for different kind of jobs like separate for API calls, separate for File uploading, separate for Emails, etc. 
-- Examples showing database integration with other databases like Realm
-
- 
 Made with :heart: from [Technogise](https://technogise.com/)
 
 You can explore our other works on [GitHub](https://github.com/technogise/)
