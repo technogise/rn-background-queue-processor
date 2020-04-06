@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "./node_modules/.bin/jest",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -18,16 +18,39 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "7.9.0",
-    "@babel/runtime": "7.9.2",
-    "@react-native-community/eslint-config": "0.0.5",
-    "babel-jest": "24.9.0",
-    "eslint": "6.8.0",
-    "jest": "24.9.0",
-    "metro-react-native-babel-preset": "0.56.4",
-    "react-test-renderer": "16.9.0"
+    "@babel/core": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "8.2.6",
+    "babel-jest": "^24.8.0",
+    "babel-preset-airbnb": "2.5.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-watch": "^4.0.2",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.55.0",
+    "mockdate": "^2.0.5",
+    "react-dom": "^16.4.1",
+    "react-test-renderer": "16.8.6",
+    "schedule": "^0.4.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "./node_modules/react-native/jest/preprocessor.js",
+      "^.+\\.(js|jsx)?$": "babel-jest"
+    },
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!react-native)/.+"
+    ]
   }
 }
