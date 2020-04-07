@@ -1,3 +1,5 @@
 rootProject.name = 'rnqpSample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
+include ':technogise_rn-background-queue-processor'
+project(':technogise_rn-background-queue-processor').projectDir = new File(rootProject.projectDir, '../node_modules/@technogise/rn-background-queue-processor/android/rnqp/')
