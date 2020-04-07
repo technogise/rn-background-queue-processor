@@ -181,7 +181,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-//    implementation project(path:':technogise_rn-background-queue-processor', configuration: 'default')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
