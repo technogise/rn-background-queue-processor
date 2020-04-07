@@ -55,6 +55,7 @@
     "job"
   ],
   "dependencies": {
+    "react-native": "^0.62.1",
     "underscore": "^1.10.2"
   }
 }

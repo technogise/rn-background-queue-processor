@@ -1,3 +1,6 @@
+
+export const EVENT_START_PUSH_SYNC = 'startPushSync';
+
 /**
  * Class Common
  *
