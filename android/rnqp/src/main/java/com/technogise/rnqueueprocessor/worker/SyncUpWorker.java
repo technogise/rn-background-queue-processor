@@ -1,4 +1,4 @@
-package com.technogise.RnQueueProcessor.Worker;
+package com.technogise.rnqueueprocessor.worker;
 
 import android.content.Context;
 

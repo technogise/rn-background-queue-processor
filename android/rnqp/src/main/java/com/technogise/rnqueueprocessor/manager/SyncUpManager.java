@@ -1,9 +1,9 @@
-package com.technogise.RnQueueProcessor.Manager;
+package com.technogise.rnqueueprocessor.manager;
 
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkRequest;
 
-import com.technogise.RnQueueProcessor.Worker.SyncUpWorker;
+import com.technogise.rnqueueprocessor.worker.SyncUpWorker;
 
 /**
  * Sync up manager to handle Syncing up requests

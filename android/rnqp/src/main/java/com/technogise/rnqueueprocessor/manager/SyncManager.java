@@ -1,4 +1,4 @@
-package com.technogise.RnQueueProcessor.Manager;
+package com.technogise.rnqueueprocessor.manager;
 
 import android.util.Log;
 

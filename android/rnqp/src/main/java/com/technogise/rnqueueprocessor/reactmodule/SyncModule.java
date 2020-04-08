@@ -1,4 +1,4 @@
-package com.technogise.RnQueueProcessor;
+package com.technogise.rnqueueprocessor;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,8 +12,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.technogise.RnQueueProcessor.Manager.SyncUpManager;
-import com.technogise.RnQueueProcessor.Worker.SyncUpWorker;
+import com.technogise.rnqueueprocessor.manager.SyncUpManager;
+import com.technogise.rnqueueprocessor.worker.SyncUpWorker;
 
 import java.util.HashMap;
 import java.util.Map;
