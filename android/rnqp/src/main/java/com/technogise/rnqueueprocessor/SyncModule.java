@@ -1,4 +1,4 @@
-package com.technogise.rnqueueprocessor.reactmodule;
+package com.technogise.rnqueueprocessor;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

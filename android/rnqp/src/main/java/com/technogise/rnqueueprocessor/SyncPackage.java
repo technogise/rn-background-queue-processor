@@ -1,4 +1,4 @@
-package com.technogise.rnqueueprocessor.reactmodule;
+package com.technogise.rnqueueprocessor;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
