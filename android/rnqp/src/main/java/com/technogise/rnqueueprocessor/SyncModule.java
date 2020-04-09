@@ -56,6 +56,11 @@ public class SyncModule extends ReactContextBaseJavaModule {
        return MODULE_NAME;
    }
 
+   @Override
+         public boolean canOverrideExistingModule() {
+           return true;
+         }
+
    /**
     * Schedule sync up/down job
     */

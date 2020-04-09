@@ -36,7 +36,7 @@ export default class Worker {
      * Process method
      */
     process() {
-        this.scheduleJob(self.SYNC_UP_JOB_TYPE);
+        this.scheduleJob(Worker.SYNC_UP_JOB_TYPE);
     }
 
     /**
