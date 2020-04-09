@@ -21,7 +21,7 @@ export default class Worker {
      * Constructor for worker
      */
     constructor(queue=[]) {
-        DeviceEventEmitter.addListener(EVENT_START_PUSH_SYNC, this.syncPackagesUpListener);
+        DeviceEventEmitter.addListener(EVENT_START_PUSH_SYNC, this.syncPackagesUpListener.bind(this));
         if (Worker.instance) {
             return Worker.instance;
         }
