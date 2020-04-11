@@ -1,5 +1,5 @@
 
-export const EVENT_START_PUSH_SYNC = 'startPushSync';
+export const EVENT_START_PROCESSING_QUEUE = 'startProcessingQueue';
 
 /**
  * Class Common

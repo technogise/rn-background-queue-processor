@@ -1,6 +1,6 @@
 import QueueProcessor from "./QueueProcessor";
 import { DeviceEventEmitter, NativeModules } from 'react-native';
-import {EVENT_START_PUSH_SYNC} from "./utils/Common";
+import {EVENT_START_PROCESSING_QUEUE} from "./utils/Common";
 
 const { SyncModule } = NativeModules;
 /**
@@ -9,19 +9,20 @@ const { SyncModule } = NativeModules;
 export default class Worker {
 
     /**
-     * Sync up job type
+     * Start processing job type
      *
      * @return {string}
      * @constructor
      */
-    static get SYNC_UP_JOB_TYPE() {
-        return 'SYNCUPJOB';
+    static get START_PROCESSING_JOB() {
+        return 'STARTPROCESSINGJOB';
     }
+
     /**
      * Constructor for worker
      */
     constructor(queue=[]) {
-        DeviceEventEmitter.addListener(EVENT_START_PUSH_SYNC, this.syncPackagesUpListener.bind(this));
+        DeviceEventEmitter.addListener(EVENT_START_PROCESSING_QUEUE, this.syncPackagesUpListener.bind(this));
         if (Worker.instance) {
             return Worker.instance;
         }
@@ -36,7 +37,7 @@ export default class Worker {
      * Process method
      */
     process() {
-        this.scheduleJob(Worker.SYNC_UP_JOB_TYPE);
+        this.scheduleJob(Worker.START_PROCESSING_JOB);
     }
 
     /**
