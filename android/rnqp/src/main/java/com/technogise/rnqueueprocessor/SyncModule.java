@@ -6,22 +6,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.technogise.rnqueueprocessor.manager.SyncUpManager;
-import com.technogise.rnqueueprocessor.worker.SyncUpWorker;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 public class SyncModule extends ReactContextBaseJavaModule {
 
    private static String MODULE_NAME = "SyncModule";
-   private static String JS_EVENT_START_PUSH_SYNC = "startPushSync";
+   private static String JS_EVENT_START_PROCESSING_QUEUE = "startProcessingQueue";
    private static String TAG = SyncModule.class.getSimpleName();
    private static ReactApplicationContext context;
 
@@ -30,7 +28,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
        context = reactContext;
        Log.i(TAG, "Sync Module constructor");
        Map<String, String> eventMaps = new HashMap<>();
-       eventMaps.put(SyncUpWorker.EVENT_START_PUSH_SYNC, JS_EVENT_START_PUSH_SYNC);
+       eventMaps.put(QueueRequestWorker.EVENT_START_PROCESSING_QUEUE, JS_EVENT_START_PROCESSING_QUEUE);
        this.registerRelayMessage(eventMaps, reactContext);
    }
 
@@ -56,11 +54,6 @@ public class SyncModule extends ReactContextBaseJavaModule {
        return MODULE_NAME;
    }
 
-   @Override
-         public boolean canOverrideExistingModule() {
-           return true;
-         }
-
    /**
     * Schedule sync up/down job
     */
@@ -68,8 +61,8 @@ public class SyncModule extends ReactContextBaseJavaModule {
    public void scheduleJob(String jobType) {
        Log.i(TAG, "Scheduling " + jobType);
 
-       if (jobType.equals(SyncUpWorker.JOB_TYPE)) {
-           new SyncUpManager().enqueueWork(context);
+       if (jobType.equals(QueueRequestWorker.START_PROCESSING_JOB)) {
+           new QueueRequestManager().enqueueWork(context);
        }
    }
 
@@ -77,7 +70,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
      * Send JS event to start the pull cache sync
      */
     private void sendEvent(String event) {
-        Log.i(TAG, "Cache sync JS event emitted:" + event);
+        Log.i(TAG, "JS event emitted:" + event);
         getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(event, null);

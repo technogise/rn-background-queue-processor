@@ -1,6 +1,8 @@
-package com.technogise.rnqueueprocessor.manager;
+package com.technogise.rnqueueprocessor;
 
 import android.util.Log;
+
+import com.facebook.react.bridge.ReactApplicationContext;
 
 import androidx.work.Constraints;
 import androidx.work.ExistingWorkPolicy;
@@ -9,12 +11,10 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
-import com.facebook.react.bridge.ReactApplicationContext;
-
 /**
- * Abstract class to manage the enqueuing of the workers
+ *  class to manage the enqueuing of the workers
  */
-public abstract class SyncManager {
+public class QueueRequestManager {
 
     /**
      * Get Sync constraints builder
@@ -26,18 +26,23 @@ public abstract class SyncManager {
     }
 
     /**
-     * Work request builder
+     * Request builder for starting queue processor
      *
-     * @return Builder
+     * @return WorkRequest.Builder Builder
      */
-    public abstract WorkRequest.Builder getWorkRequestBuilder();
+    public WorkRequest.Builder getWorkRequestBuilder() {
+        return new OneTimeWorkRequest.Builder(QueueRequestWorker.class)
+                .addTag(this.getWorkName());
+    }
 
     /**
      * Work Name
      *
-     * @return Work Name
+     * @return Work name
      */
-    public abstract String getWorkName();
+    public String getWorkName() {
+        return QueueRequestWorker.START_PROCESSING_JOB;
+    }
 
     /**
      * Default "Existing Work Policy"
@@ -61,7 +66,7 @@ public abstract class SyncManager {
         WorkRequest syncRequest = workRequestBuilder.setConstraints(constraints)
                 .build();
         if (syncRequest instanceof OneTimeWorkRequest) {
-            Log.i("SyncManager", "Enqueue "+this.getWorkName()+" :Replacing");
+            Log.i("QueueRequestManager", "Enqueue "+this.getWorkName()+" :Replacing");
             WorkManager.getInstance(context)
                     .enqueueUniqueWork(this.getWorkName(), this.getExistingWorkPolicy(), (OneTimeWorkRequest) syncRequest);
         }
