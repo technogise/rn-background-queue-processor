@@ -16,14 +16,14 @@ import java.util.Map;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-public class SyncModule extends ReactContextBaseJavaModule {
+public class QueueRequestModule extends ReactContextBaseJavaModule {
 
    private static String MODULE_NAME = "SyncModule";
    private static String JS_EVENT_START_PROCESSING_QUEUE = "startProcessingQueue";
-   private static String TAG = SyncModule.class.getSimpleName();
+   private static String TAG = QueueRequestModule.class.getSimpleName();
    private static ReactApplicationContext context;
 
-   public SyncModule(ReactApplicationContext reactContext) {
+   public QueueRequestModule(ReactApplicationContext reactContext) {
        super(reactContext);
        context = reactContext;
        Log.i(TAG, "Sync Module constructor");
@@ -42,7 +42,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     Log.i(TAG, "Received broadcast");
-                    SyncModule.this.sendEvent(jsEventName);
+                    QueueRequestModule.this.sendEvent(jsEventName);
                 }
             };
             localBroadcastManager.registerReceiver(cacheSyncReceiver, new IntentFilter(eventName));
@@ -55,19 +55,19 @@ public class SyncModule extends ReactContextBaseJavaModule {
    }
 
    /**
-    * Schedule sync up/down job
+    * Schedule job
     */
    @ReactMethod
-   public void scheduleJob(String jobType) {
-       Log.i(TAG, "Scheduling " + jobType);
+   public void scheduleJob(String job) {
+       Log.i(TAG, "Scheduling " + job);
 
-       if (jobType.equals(QueueRequestWorker.START_PROCESSING_JOB)) {
+       if (job.equals(QueueRequestWorker.START_PROCESSING_JOB)) {
            new QueueRequestManager().enqueueWork(context);
        }
    }
 
     /**
-     * Send JS event to start the pull cache sync
+     * Send JS event to start processing queue
      */
     private void sendEvent(String event) {
         Log.i(TAG, "JS event emitted:" + event);

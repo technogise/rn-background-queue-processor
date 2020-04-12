@@ -19,7 +19,7 @@ public class QueueRequestWorker extends Worker {
     public static final String EVENT_START_PROCESSING_QUEUE = "startProcessingQueue";
 
     /**
-     * Job Type
+     * Start Processing Job
      */
     public static final String START_PROCESSING_JOB = "STARTPROCESSINGJOB";
 

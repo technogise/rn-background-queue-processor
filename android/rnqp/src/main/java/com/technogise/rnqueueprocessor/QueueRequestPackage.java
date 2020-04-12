@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SyncPackage implements ReactPackage {
+public class QueueRequestPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.emptyList();
@@ -21,7 +21,7 @@ public class SyncPackage implements ReactPackage {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         //We import the module file here
-        modules.add(new SyncModule(reactContext));
+        modules.add(new QueueRequestModule(reactContext));
         return modules;
     }
 
