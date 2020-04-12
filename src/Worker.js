@@ -41,11 +41,11 @@ export default class Worker {
     }
 
     /**
-     * Schedule job type
-     * @param jobType
+     * Schedule job
+     * @param job
      */
-    scheduleJob(jobType) {
-        SyncModule.scheduleJob(jobType);
+    scheduleJob(job) {
+        SyncModule.scheduleJob(job);
     }
 
     /**
