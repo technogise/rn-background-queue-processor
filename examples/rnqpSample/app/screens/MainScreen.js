@@ -6,7 +6,7 @@ import {
   RealmAdapter,
   realmConfig,
   FailedJobSchema,
-} from 'rn-background-queue-processor-realm-adapter';
+} from '@technogise/rn-background-queue-processor-realm-adapter';
 import Button from '../components/Button';
 import styles from '../styles/MainScreenStyle';
 import ExampleJob from '../service/ExampleJob';
