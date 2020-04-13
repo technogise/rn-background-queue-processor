@@ -18,7 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class QueueRequestModule extends ReactContextBaseJavaModule {
 
-   private static String MODULE_NAME = "SyncModule";
+   private static String MODULE_NAME = "QueueRequestModule";
    private static String JS_EVENT_START_PROCESSING_QUEUE = "startProcessingQueue";
    private static String TAG = QueueRequestModule.class.getSimpleName();
    private static ReactApplicationContext context;

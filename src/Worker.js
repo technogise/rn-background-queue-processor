@@ -2,7 +2,7 @@ import QueueProcessor from "./QueueProcessor";
 import { DeviceEventEmitter, NativeModules } from 'react-native';
 import {EVENT_START_PROCESSING_QUEUE} from "./utils/Common";
 
-const { SyncModule } = NativeModules;
+const { QueueRequestModule } = NativeModules;
 /**
  * Worker class
  */
@@ -45,7 +45,7 @@ export default class Worker {
      * @param job
      */
     scheduleJob(job) {
-        SyncModule.scheduleJob(job);
+        QueueRequestModule.scheduleJob(job);
     }
 
     /**
