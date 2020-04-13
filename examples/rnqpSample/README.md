@@ -72,6 +72,14 @@ Sample app that uses all of the commonly used [rn-background-queue-processor](ht
   }
 ```
 
+  - To process the failed jobs again
+   
+```
+  onProcessFailedJobs() {
+      worker.processFailedJobs();
+    }
+```
+
 Here is a log after job execution
 
 ![Screenshot](util/readmeImages/ConsoleOnSuccess.png)

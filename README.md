@@ -14,10 +14,11 @@ This package does not have any prerequisites that need to be installed.
 
 - A React Native Queue Processor with persistent queues using [rn-background-queue-processor-realm-adapter](https://github.com/technogise/rn-background-queue-processor-realm-adapter)
 - Jobs will be executed according to priorities using the queues. 
-- Job will retry until the failed count matches job's number of retry attempts with retryInterval
+- Job will retry until the failed count matches job's number of retry attempts with retryInterval.
 - Has functionality for Worker instances as well. 
-- Background Persistent queue processing 
+- Background Persistent queue processing using [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager).
 - It also plays well with Workers so your jobs can be thrown on the queue, then processed in dedicated worker threads for improved processing performance.
+- Failed Jobs can also be processed.
 
 ## Compatibility
 
@@ -45,8 +46,9 @@ constructor(dbAdapter) {
    - `peek()`: To get the top job from Queue
    - `getSize()`: Returns the length of Queue
    - `getItems()`: Gives all items of Queue
+   - `failedJobsEnqueue()` Enqueue all the Failed Jobs for processing
    
- - [Adapter](src/DbAdapter/Adapter.js)
+ - [Adapter](src/DbAdapter/InMemoryAdapter.js)
  
     It is an abstract class which needs to be implemented by users of this package for easy use of any database for storing and processing the queues.
     
@@ -57,6 +59,7 @@ constructor(dbAdapter) {
    - `addItem(item)`: Method to add a job in the current queue
    - `getLength()`: Method to get length of current queue
    - `getTopItem()`: Method to get the current job for processing
+   - `addFailedItems()` Method to add failed items
    
  - [Job](src/Job.js)
     While Job class has methods to get id, name and param of current job, we have made the `execute`, `jobSuccess` and `jobFail` function to be abstract for the developer so that he/she decides what to do on execute call.
@@ -69,7 +72,12 @@ constructor(dbAdapter) {
 
  - [Worker](src/Worker.js)
  
-    Worker class is a singleton class. In this class, user can add multiple queues using `addQueue(queue)` and process queues using `process()` 
+    Worker class is a singleton class. In this class, user can process queue using `process()` 
+    
+ - Communication with native
+    
+    - Process function in worker class schedule a job(STARTPROCESSINGJOB) which calls native module
+    - Native module emits events which are listened on the Js side, based on the event emitted queueProcessor will start processing.
 
 Made with :heart: from [Technogise](https://technogise.com/)
 
