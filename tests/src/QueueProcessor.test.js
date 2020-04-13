@@ -126,4 +126,12 @@ describe('Test QueueProcessor', () => {
         expect(job.jobFail).toHaveBeenCalledTimes(1);
         expect(queueObj.getSize()).toBe(0);
     });
+
+    test('test startProcessingFailedJobs', () => {
+        const queueProcessor = new QueueProcessor();
+        queueProcessor.failedQueue = jest.fn();
+        queueProcessor.failedQueue.failedJobsEnqueue = jest.fn();
+        queueProcessor.startProcessingFailedJobs();
+        expect(queueProcessor.failedQueue.failedJobsEnqueue).toHaveBeenCalled();
+    })
 });
