@@ -42,8 +42,11 @@ export default class QueueProcessor {
         }
     }
 
-    processFailedJob() {
-        this.queue.enqueueFailedJobs();
+    /**
+     * start processing failed jobs
+     */
+    startProcessingFailedJobs() {
+        this.failedQueue.failedJobsEnqueue();
     }
 
     /**
