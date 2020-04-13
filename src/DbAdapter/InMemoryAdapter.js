@@ -39,6 +39,18 @@ export default class InMemoryAdapter extends Adapter {
     }
 
     /**
+     * enqueue failed items in items array
+     */
+    addFailedItems() {
+        if(this.failedItems.length) {
+            for(let item = 0; item<this.failedItems.length; item+=1){
+                this.items.push(this.failedItems[item]);
+                this.failedItems.splice(item, 1)
+            }
+        }
+    }
+
+    /**
      * Method to add failed item
      * @param item
      */

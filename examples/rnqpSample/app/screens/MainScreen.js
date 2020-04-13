@@ -17,7 +17,14 @@ export default class MainScreen extends React.Component {
     super();
     const dbAdapter = new RealmAdapter(ExampleJob.prototype);
     this.queue = new Queue(dbAdapter);
-    _.bindAll(this, 'onAdd', 'onProcess', 'onAddFail', 'getNumberOfFailedJob');
+    _.bindAll(
+      this,
+      'onAdd',
+      'onProcess',
+      'onAddFail',
+      'getNumberOfFailedJob',
+      'onProcessFailedJobs',
+    );
   }
 
   onAdd() {
@@ -46,6 +53,9 @@ export default class MainScreen extends React.Component {
     worker.addQueue(this.queue);
     worker.process();
   }
+  onProcessFailedJobs() {
+    worker.processFailedJobs();
+  }
 
   getNumberOfFailedJob() {
     const failedJobLength = JSON.stringify(
@@ -60,6 +70,9 @@ export default class MainScreen extends React.Component {
         <View style={styles.buttonContainer}>
           <Button onClick={this.onAdd}>1. ADD JOB</Button>
           <Button onClick={this.onAddFail}>2. ADD JOB (to test Fail)</Button>
+          <Button onClick={this.onProcessFailedJobs}>
+            PROCESS FAILED JOBS
+          </Button>
           <Button onClick={this.onProcess}>PROCESS</Button>
           <Button onClick={this.getNumberOfFailedJob}>
             Get Number of Failed Jobs

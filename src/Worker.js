@@ -41,6 +41,13 @@ export default class Worker {
     }
 
     /**
+     * process failed jobs
+     */
+    processFailedJobs() {
+        this.queueProcessor.processFailedJob();
+    }
+
+    /**
      * Schedule job
      * @param job
      */

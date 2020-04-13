@@ -42,6 +42,10 @@ export default class QueueProcessor {
         }
     }
 
+    processFailedJob() {
+        this.queue.enqueueFailedJobs();
+    }
+
     /**
      * Define job success behaviour
      */
