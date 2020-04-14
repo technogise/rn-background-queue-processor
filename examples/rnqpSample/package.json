@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@technogise/rn-background-queue-processor": "git+https://github.com/technogise/rn-background-queue-processor.git",
+    "@technogise/rn-background-queue-processor": "^2.0.0",
     "@technogise/rn-background-queue-processor-realm-adapter": "^1.0.1",
     "react": "16.9.0",
     "react-native": "^0.62.1",
