@@ -1,6 +1,6 @@
 {
   "name": "@technogise/rn-background-queue-processor",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Library which creates a background queue processor for react native apps.",
   "main": "index.js",
   "scripts": {
