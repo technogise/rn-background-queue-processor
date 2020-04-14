@@ -32,6 +32,43 @@ While we ensure to keep the library updated with newer and improved upcoming rel
 
 - Here is a [Sample Application](https://github.com/technogise/rn-background-queue-processor/tree/master/examples/rnqpSample)
          
+ - Example import
+```
+import { Queue } from '@technogise/rn-background-queue-processor';
+import { RealmAdapter } from '@technogise/rn-background-queue-processor-realm-adapter';
+
+const dbAdapter = new RealmAdapter(ExampleJob.prototype);
+    this.queue = new Queue(dbAdapter);
+```
+
+ - To add job in a queue
+ ```
+ const jobToBeCreated = {
+       name: 'testJob',
+       param: {
+         url: 'http://dummy.restapiexample.com/api/v1/employees',
+       },
+       priority: 2,
+     };
+     const job = new ExampleJob(jobToBeCreated);
+     this.queue.enqueue(job);
+```
+
+ - To add the queue and process them using worker class instance 
+ ```
+   onProcess() {
+     worker.addQueue(queue);
+     worker.process();
+   }
+```
+
+ - add worker instance in common file
+```
+import {Worker} from '@technogise/rn-background-queue-processor';
+
+export const worker = new Worker();
+```
+
  - [Queue](src/Queue.js)
     
 ```
