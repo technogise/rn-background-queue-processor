@@ -13,7 +13,7 @@
     "@technogise/rn-background-queue-processor": "^2.0.0",
     "@technogise/rn-background-queue-processor-realm-adapter": "^1.0.1",
     "react": "16.9.0",
-    "react-native": "^0.62.1",
+    "react-native": "^0.62.3",
     "realm": "^5.0.3",
     "underscore": "^1.12.1"
   },
